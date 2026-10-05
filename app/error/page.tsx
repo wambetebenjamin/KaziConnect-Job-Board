@@ -1,0 +1,3 @@
+'use client';
+import { RefreshCw } from 'lucide-react';
+export default function ErrorPage(){return <section className="legal-layout" style={{textAlign:'center',paddingTop:130,paddingBottom:170}}><p className="eyebrow">WE’LL GET THIS BACK ON TRACK</p><h1 style={{fontSize:'clamp(4rem,11vw,8rem)',margin:0,color:'#206dfb'}}>500</h1><h2>Something went wrong on our end. We are working on it.</h2><p className="legal-intro" style={{margin:'18px auto 28px'}}>Please try again. No action is needed from you.</p><button className="button button-large" onClick={()=>window.location.reload()}><RefreshCw size={18}/>Try Again</button></section>}

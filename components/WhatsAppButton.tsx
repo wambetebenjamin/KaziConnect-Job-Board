@@ -1,0 +1,2 @@
+import { MessageCircle } from 'lucide-react';
+export function WhatsAppButton() { return <a className="whatsapp-button" href="https://wa.me/254112272061?text=Hello!%20I%20need%20help%20with%20KaziConnect." target="_blank" rel="noreferrer" aria-label="Get help finding or posting a job on WhatsApp"><span className="whatsapp-tooltip">Get help finding or posting a job</span><MessageCircle size={25}/></a>; }

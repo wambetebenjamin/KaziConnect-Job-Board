@@ -1,0 +1,7 @@
+[
+  {"role":"Software Engineer","industry":"Technology","level":"Mid-level","location":"Nairobi","low":150000,"median":220000,"high":320000},
+  {"role":"Product Designer","industry":"Technology","level":"Mid-level","location":"Nairobi","low":125000,"median":185000,"high":250000},
+  {"role":"Financial Analyst","industry":"Finance","level":"Mid-level","location":"Nairobi","low":95000,"median":145000,"high":210000},
+  {"role":"Programme Officer","industry":"NGO","level":"Mid-level","location":"Kisumu","low":85000,"median":125000,"high":180000},
+  {"role":"Graduate Trainee","industry":"Logistics","level":"Entry level","location":"Mombasa","low":45000,"median":60000,"high":85000}
+]

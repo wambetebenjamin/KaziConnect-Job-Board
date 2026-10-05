@@ -1,0 +1,5 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { store } from '@/lib/store';
+import { requireRole } from '@/lib/auth';
+export async function GET(request:NextRequest){const user=await requireRole('employer');if(!user)return NextResponse.json({error:'Unauthorized'},{status:401});const jobSlug=new URL(request.url).searchParams.get('jobSlug');return NextResponse.json({data:store.applications.filter(item=>!jobSlug||item.jobSlug===jobSlug),protected:true})}
+export async function PATCH(request:NextRequest){const user=await requireRole('employer');if(!user)return NextResponse.json({error:'Unauthorized'},{status:401});const {id,status}=await request.json();const application=store.applications.find(x=>x.id===id);if(!application)return NextResponse.json({error:'Application not found.'},{status:404});if(!['New','Reviewed','Shortlisted','Rejected'].includes(status))return NextResponse.json({error:'Invalid status.'},{status:400});application.status=status;return NextResponse.json({data:application})}

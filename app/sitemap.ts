@@ -1,0 +1,3 @@
+import type { MetadataRoute } from 'next';
+import { articles, companies, jobs } from '@/lib/data';
+export default function sitemap(): MetadataRoute.Sitemap {const base=process.env.NEXT_PUBLIC_SITE_URL??'https://kaziconnect.co.ke';return [ '', '/jobs','/companies','/career-advice','/salary-guide','/contact','/legal/privacy-policy','/legal/terms','/legal/cookie-policy',...jobs.map(job=>`/jobs/${job.slug}`),...companies.map(company=>`/companies/${company.slug}`),...articles.map(article=>`/career-advice/${article.slug}`)].map(path=>({url:`${base}${path}`,lastModified:new Date('2026-10-05'),changeFrequency:path.startsWith('/jobs/')?'weekly':'monthly',priority:path===''?1:.7}))}

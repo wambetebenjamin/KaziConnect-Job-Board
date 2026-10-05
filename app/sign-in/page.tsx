@@ -1,0 +1,4 @@
+import Link from 'next/link';
+import { PageHero } from '@/components/PageHero';
+export const metadata={title:'Sign In'};
+export default function SignIn(){return <><PageHero title="Welcome back." description="Sign in to keep your job search or hiring process moving."/><div className="post-job-wrap"><form className="post-form"><h2>Sign in to KaziConnect</h2><label>Email<input type="email" required placeholder="you@example.com"/></label><label>Password<input type="password" required/></label><Link className="text-action" href="/reset-password">Forgot your password?</Link><button className="button" style={{marginTop:22}}>Sign in</button><p className="form-fineprint">Google sign-in and email magic links are available when authentication is configured.</p><p>New here? <Link className="text-action" href="/register">Create an account</Link></p></form></div></>}
