@@ -1,0 +1,4 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { jobs } from '@/lib/data';
+export const revalidate=120;
+export async function GET(request:NextRequest){const {searchParams}=new URL(request.url);const q=(searchParams.get('q')??'').toLowerCase();const category=searchParams.get('category');const location=searchParams.get('location');const page=Math.max(1,Number(searchParams.get('page')??1));const limit=Math.min(50,Math.max(1,Number(searchParams.get('limit')??12)));const filtered=jobs.filter(job=>(!q||`${job.title} ${job.company} ${job.category}`.toLowerCase().includes(q))&&(!category||job.category===category)&&(!location||job.location.toLowerCase().includes(location.toLowerCase())));return NextResponse.json({data:filtered.slice((page-1)*limit,page*limit),pagination:{page,limit,total:filtered.length,pages:Math.ceil(filtered.length/limit)}})}

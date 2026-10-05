@@ -1,0 +1,3 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { verifyCaptcha } from '@/lib/captcha';
+export async function POST(request:NextRequest){const {name,organisation,email,password,role,captchaToken}=await request.json();const action=role==='employer'?'employer_registration':'jobseeker_registration';const check=await verifyCaptcha(captchaToken,action);if(!check.success)return NextResponse.json({error:check.message,fallbackRequired:check.fallbackRequired},{status:403});if(!name||!organisation||!email||!password)return NextResponse.json({error:'Please complete all required fields.'},{status:400});return NextResponse.json({success:true,message:'Registration request created.'},{status:201})}

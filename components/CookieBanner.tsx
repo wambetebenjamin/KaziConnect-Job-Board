@@ -1,0 +1,14 @@
+'use client';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { X } from 'lucide-react';
+type Consent={necessary:true;analytics:boolean;marketing:boolean;updatedAt:string};
+const KEY='kaziconnect-cookie-consent';
+export function CookieBanner() {
+ const [visible,setVisible]=useState(false); const [manage,setManage]=useState(false); const [analytics,setAnalytics]=useState(false); const [marketing,setMarketing]=useState(false);
+ useEffect(()=>{const saved=localStorage.getItem(KEY); if(!saved) setVisible(true);},[]);
+ const save=(all=false)=>{const value:Consent={necessary:true,analytics:all||analytics,marketing:all||marketing,updatedAt:new Date().toISOString()}; localStorage.setItem(KEY,JSON.stringify(value)); setVisible(false);setManage(false);};
+ return <>{visible&&<aside className="cookie-banner" aria-label="Cookie consent"><div><strong>Your privacy matters.</strong><p>We use cookies to improve your experience and analyse traffic. By continuing you agree to our <Link href="/legal/cookie-policy">Cookie Policy</Link>.</p></div><div className="cookie-actions"><button className="button button-small button-ghost" onClick={()=>setManage(true)}>Manage Preferences</button><button className="button button-small" onClick={()=>save(true)}>Accept All</button></div></aside>}
+ {manage&&<div className="modal-backdrop" role="presentation"><section className="preferences-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-title"><button className="icon-button close-modal" onClick={()=>setManage(false)} aria-label="Close preferences"><X size={18}/></button><p className="eyebrow">COOKIE PREFERENCES</p><h2 id="cookie-title">Choose your settings</h2><p>Necessary cookies keep core features and security working. You can change optional preferences at any time.</p><Preference label="Necessary cookies" description="Required for secure, reliable service." checked disabled/><Preference label="Analytics cookies" description="Help us understand traffic and improve KaziConnect." checked={analytics} onChange={setAnalytics}/><Preference label="Marketing cookies" description="Allow more relevant outreach and campaign measurement." checked={marketing} onChange={setMarketing}/><div className="modal-actions"><button className="button button-ghost" onClick={()=>save(false)}>Save preferences</button><button className="button" onClick={()=>save(true)}>Accept all</button></div></section></div>}</>;
+}
+function Preference({label,description,checked,disabled,onChange}:{label:string;description:string;checked:boolean;disabled?:boolean;onChange?:(next:boolean)=>void}) {return <label className="preference"><span><strong>{label}</strong><small>{description}</small></span><input type="checkbox" checked={checked} disabled={disabled} onChange={(e)=>onChange?.(e.target.checked)}/><span className="toggle"/></label>}
